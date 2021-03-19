@@ -11,6 +11,11 @@ zbblanton@DESKTOP-IMPMTVB:~/workspace$ python3 ripe_ip_checker.py 3.0.10.3
 Found
 ```
 
+# Dependencies:
+
+* `Python v3.3 or greater`
+* `Requests module (pip3 install requests)`
+
 # Thought Process
 
 So this was a fun problem. Seems simple at first but there are a few gotchas.
@@ -59,7 +64,3 @@ This script doesn't have any functions other than main so I decided not to do an
 chmod +x test_ripe_ip_checker.sh
 ./test_ripe_ip_checker.sh
 ```
-
-# Dependecies:
-* `Python v3.3 or greater`
-
