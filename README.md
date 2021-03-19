@@ -4,7 +4,7 @@ Simple CLI tool to check if a given IP address is registered in one of the CIDR 
 
 # Usage
 
-Enter any valid IPv4 IP as an argument. The result will either be "Found" or "Not Found". For example:
+Enter any valid IPv4 address as an argument. The result will either be "Found" or "Not Found". For example:
 
 ```bash
 zbblanton@DESKTOP-IMPMTVB:~/workspace$ python3 ripe_ip_checker.py 3.0.10.3
