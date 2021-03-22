@@ -1,34 +1,42 @@
 import requests, sys, ipaddress
 
-if __name__ == "__main__":
-  # Check for correct number of args
-  if len(sys.argv) < 2:
-    print("Usage python3 ripe_ip_checker.py <IP>")
-    sys.exit(1)
-
+def searchPublicNetworks(inputIP):
   # Try to convert the ip address into an IPv4Address object
   # Stop if the IP address is private
   try:
-    inputIP = ipaddress.IPv4Address(sys.argv[1])
-    if inputIP.is_private:
-      print("This IP address is for a private network")
-      sys.exit(1)
+    ip = ipaddress.IPv4Address(inputIP)
+    if ip.is_private:
+      raise Exception("This IP address is for a private network")      
   except ValueError:
-    raise SystemExit("Not a Valid IPv4 address")
+    raise Exception("Not a Valid IPv4 address")
+  except Exception:
+    raise
 
   # Try calling the api and dump the resp json
   try:
+    print("got here")
     resp = requests.get('https://stat.ripe.net/data/country-resource-list/data.json?resource=US&v4_format=prefix')
     data = resp.json()
   except requests.exceptions.RequestException:
-    raise SystemExit("Error making API call")
+    raise Exception("Error making API call")
 
   try:
-    for ip in data['data']['resources']['ipv4']:
-      if inputIP in ipaddress.ip_network(ip):
-        print("Found")
-        sys.exit(0)
-    print("Not Found")
-    sys.exit(0)
+    for network in data['data']['resources']['ipv4']:
+      if ip in ipaddress.ip_network(network):
+        return "Found"
+    return "Not Found"
   except (ValueError, KeyError):
-    raise SystemExit("Response JSON is invalid or an error occurred when converting a CIDR address")
+    raise Exception("Response JSON is invalid or an error occurred when converting a CIDR address")
+
+def main():
+  try:
+    # Check for correct number of args
+    if len(sys.argv) < 2:
+      raise Exception("Usage python3 ripe_ip_checker.py <IP>") 
+    ip = sys.argv[1]
+    print(searchPublicNetworks(ip))
+  except Exception as e:
+    raise SystemExit(e)
+
+if __name__ == "__main__": # pragma: no cover
+  main()
