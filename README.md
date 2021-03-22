@@ -16,6 +16,11 @@ Found
 * `Python v3.3 or greater`
 * `Requests module (pip3 install requests)`
 
+For testing:
+
+* `pytest (pip3 install pytest)`
+* `pytest-cov (pip3 install pytest-cov)`
+
 # Thought Process
 
 So this was a fun problem. Seems simple at first but there are a few gotchas.
@@ -58,7 +63,13 @@ With such good results using the built-in `ipaddress` module I decided that it w
 
 # Testing
 
-This script doesn't have any functions other than main so I decided not to do any unit tests. However, I wanted to do some kind of testing so I wrote a quick and dirty shell script to run integration tests.
+The file `test_ripe_ip_checker.py` contains unit tests for `pytest` and should provide 100% coverage:
+
+```bash
+pytest --cov=ripe_ip_checker --cov-report term-missing
+```
+
+There is also a quick and dirty shell script to run some integration tests.
 
 ```bash
 chmod +x test_ripe_ip_checker.sh

@@ -1,8 +1,8 @@
-import pytest
-import ripe_ip_checker
-from unittest.mock import patch
-import requests
 import sys
+from unittest.mock import patch
+import pytest
+import requests
+import ripe_ip_checker
 
 mockData = {
     'data': {
