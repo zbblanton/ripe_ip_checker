@@ -3,6 +3,15 @@ import ipaddress
 import requests
 
 def searchPublicNetworks(inputIP):
+    """
+    Gets a list of US public CIDR ranges RIPE database and then checks if given IP is in one of the networks
+    
+    Parameters: 
+    inputIP (string): IP address (Ex: 3.0.0.2)
+  
+    Returns: 
+    String: Found or Not Found
+    """
     # Try to convert the ip address into an IPv4Address object
     # Stop if the IP address is private
     try:
